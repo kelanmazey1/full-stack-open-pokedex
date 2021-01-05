@@ -27,9 +27,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: Run akhileshns/heroku-deploy@v3.8.8
+      - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.8.8
         with:
+          healthcheck: https://fullstackopenpokedex.herokuapp.com/health
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstackopenpokedex'
           heroku_email: 'kelanmazey1@gmail.com'
