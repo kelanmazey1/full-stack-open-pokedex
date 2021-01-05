@@ -24,6 +24,5 @@ jobs:
         with:
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
-          wait-on-timout: 120
-          command: npm run test:e2e; echo 'Wait on has finished'
+          command: echo Wait on has finished; npm run test:e2e
           
