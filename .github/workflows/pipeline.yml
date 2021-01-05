@@ -24,6 +24,6 @@ jobs:
         with:
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
-          wait-on-timout: 120
+          wait-on-timeout: 120
           command: echo The server started
           
