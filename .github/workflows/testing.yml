@@ -15,5 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Shouldn't run if skip in commit
+        env:
+          TEST: ${{ !contains(github.event.commits.*.message, '#skip') }}
+
         if: ${{ !contains(github.event.commits.*.message, '#skip') }}
-        run: echo The step ran
+        run: echo The step ran && echo $TEST
