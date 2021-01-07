@@ -43,7 +43,7 @@ jobs:
           heroku_email: 'kelanmazey1@gmail.com'
       - name: Send notification to Slack
         env:
-          STEPS_CONTEXT: ${{ toJso(steps) }}
+          STEPS_CONTEXT: ${{ toJson(steps) }}
         run: echo $STEPS_CONTEXT
       - uses: actions/checkout@v2
       - name: Bump version and push tag
