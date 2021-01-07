@@ -31,7 +31,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to Heroku
-        id: deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.8.8
         with:
@@ -42,7 +41,7 @@ jobs:
           heroku_app_name: 'fullstackopenpokedex'
           heroku_email: 'kelanmazey1@gmail.com'
       - name: Send slack notification
-        uses: 83987a/action-slack@v3
+        uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,eventName,ref,took
