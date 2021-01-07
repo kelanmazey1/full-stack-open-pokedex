@@ -41,13 +41,12 @@ jobs:
           heroku_app_name: 'fullstackopenpokedex'
           heroku_email: 'kelanmazey1@gmail.com'
       - name: Send slack notification
-        # uses: 8398a7/action-slack@v3
-        # with:
-        #   status: ${{ job.status }}
-        #   fields: repo,commit,author,eventName,ref,took
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,commit,author,eventName,ref,took
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: echo Notification ran
         if: ${{ !contains(join(github.event.commits.*.message, ', '), '#skip') && always() }}
       - uses: actions/checkout@v2
       - name: Bump version and push tag
