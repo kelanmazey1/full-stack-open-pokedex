@@ -31,6 +31,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to Heroku
+        id: deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.8.8
         with:
@@ -40,6 +41,10 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstackopenpokedex'
           heroku_email: 'kelanmazey1@gmail.com'
+      - name: Send notification to Slack
+        env:
+          STEPS_CONTEXT: ${{ toJso(steps) }}
+        run: echo $STEPS_CONTEXT
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
